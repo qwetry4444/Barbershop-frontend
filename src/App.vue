@@ -15,8 +15,7 @@
 
     <main>
       <div v-if="isAuthenticated && user" class="auth-block">
-        <p>Welcome, {{ user.name }}</p>
-        <button @click="logout">Logout</button>
+        <router-view></router-view>
       </div>
 
       <div v-else class="auth-block">
@@ -32,10 +31,8 @@
           <button type="submit">Login</button>
           <p v-if="authError" class="error">{{ authError }}</p>
         </form>
-        <router-view></router-view>
       </div>
     </main>
-
   </div>
 </template>
 

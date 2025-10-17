@@ -3,6 +3,5 @@
 </script>
 
 <template>
-  <main>
-  </main>
+    <h2>Главная</h2>
 </template>
