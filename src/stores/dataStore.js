@@ -9,11 +9,13 @@ export const useDataStore = defineStore('data', {
     barbers_total: null,
     items: [],
     errorMessage: "",
+    loading: false,
   }),
   actions: {
     async get_services(page = 0, perpage = 5) {
       this.errorMessage = "";
       try {
+        this.loading = true;
         const response = await axios.get(backendURL + '/services', {
           params: {
             page: page,
@@ -24,20 +26,24 @@ export const useDataStore = defineStore('data', {
       } catch (error) {
         this.handleError(error)
       }
+      this.loading = false;
     },
     async get_services_total() {
       this.errorMessage = "";
       try {
+        this.loading = true;
         const response = await axios.get(backendURL + '/services/total');
         this.services_total = response.data;
       } catch (error) {
         this.handleError(error)
       }
+      this.loading = false;
     },
 
     async get_barbers(page = 0, perpage = 5) {
       this.errorMessage = "";
       try {
+        this.loading = true;
         const response = await axios.get(backendURL + '/barbers', {
           params: {
             page: page,
@@ -48,15 +54,18 @@ export const useDataStore = defineStore('data', {
       } catch (error) {
         this.handleError(error)
       }
+      this.loading = false;
     },
     async get_barbers_total() {
       this.errorMessage = "";
       try {
+        this.loading = true;
         const response = await axios.get(backendURL + '/barbers/total');
         this.barbers_total = response.data;
       } catch (error) {
         this.handleError(error)
       }
+      this.loading = false;
     },
     handleError(error) {
       if (error.response){
