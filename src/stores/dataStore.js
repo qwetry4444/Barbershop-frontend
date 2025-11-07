@@ -9,6 +9,7 @@ export const useDataStore = defineStore('data', {
     barbers_total: null,
     items: [],
     errorMessage: "",
+    errorCode: "",
     loading: false,
   }),
   actions: {
@@ -76,6 +77,33 @@ export const useDataStore = defineStore('data', {
         console.log(error)
       } else {
         console.log(error)
+      }
+    },
+    async create_service(formData) {
+      this.errorMessage = "";
+      try {
+        const response = await axios.post(backendURL + '/service', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Authorization: 'Bearer ' + localStorage.getItem('token')
+            },
+          }
+        );
+        this.errorCode = response.data.code;
+        this.errorMessage = response.data.message;
+      } catch (error) {
+        if (error.response) {
+          this.errorCode = 11;
+          this.errorMessage = error.response.data.message;
+          console.log(error)
+        } else if (error.request) {
+          this.errorCode = 12;
+          this.errorMessage = error.message;
+          console.log(error)
+        } else {
+          this.errorCode = 13;
+          console.log(error)
+        }
       }
     }
   }

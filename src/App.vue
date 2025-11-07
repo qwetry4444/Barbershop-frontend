@@ -101,7 +101,6 @@ export default {
               label="Выйти"
               icon="pi pi-sign-out"
               severity="secondary"
-              text
               @click="logout"
             />
           </div>
